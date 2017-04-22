@@ -52,8 +52,16 @@ namespace MSR.Data.VersionControl.Git
 				revision, ToGitPath(path)
 			);
 		}
-		
-		public string RepositoryPath
+
+        public Stream Show(string revision, string path)
+        {
+            return RunCommand(
+                "show {0}:{1}",
+                revision, ToGitPath(path)
+            );
+        }
+
+        public string RepositoryPath
 		{
 			get; private set;
 		}

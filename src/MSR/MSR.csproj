@@ -118,23 +118,27 @@
     <Compile Include="Data\VersionControl\FileUniDiff.cs" />
     <Compile Include="Data\VersionControl\Git\CommandLineGitClient.cs" />
     <Compile Include="Data\VersionControl\Git\GitBlame.cs" />
+    <Compile Include="Data\VersionControl\Git\GitBodyFile.cs" />
     <Compile Include="Data\VersionControl\Git\GitData.cs" />
     <Compile Include="Data\VersionControl\Git\GitLog.cs" />
     <Compile Include="Data\VersionControl\Git\TouchedFileGitAction.cs" />
     <Compile Include="Data\VersionControl\Git\IGitClient.cs" />
     <Compile Include="Data\VersionControl\Hg\CommandLineHgClient.cs" />
     <Compile Include="Data\VersionControl\Hg\HgBlame.cs" />
+    <Compile Include="Data\VersionControl\Hg\HgBodyFile.cs" />
     <Compile Include="Data\VersionControl\Hg\HgData.cs" />
     <Compile Include="Data\VersionControl\Hg\HgLog.cs" />
     <Compile Include="Data\VersionControl\Hg\IHgClient.cs" />
     <Compile Include="Data\VersionControl\Hg\TouchedFileHgAction.cs" />
     <Compile Include="Data\VersionControl\IBlame.cs" />
+    <Compile Include="Data\VersionControl\IBodyFile.cs" />
     <Compile Include="Data\VersionControl\IDiff.cs" />
     <Compile Include="Data\VersionControl\ILog.cs" />
     <Compile Include="Data\Entities\Mapping\ModificationMapper.cs" />
     <Compile Include="Data\VersionControl\Log.cs" />
     <Compile Include="Data\VersionControl\ScmDataCache.cs" />
     <Compile Include="Data\VersionControl\Svn\SvnBlame.cs" />
+    <Compile Include="Data\VersionControl\Svn\SvnBodyFile.cs" />
     <Compile Include="Data\VersionControl\Svn\SvnFullUniDiff.cs" />
     <Compile Include="Data\VersionControl\Svn\SvnLog.cs" />
     <Compile Include="Data\Persistent\PersistentDataStore.cs" />
@@ -156,6 +160,10 @@
     <Compile Include="Data\VersionControl\Svn\SvnData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ABCMetrics\ABCMetrics.csproj">
+      <Project>{343a5293-2a42-4943-b4d3-e60bcab2e38f}</Project>
+      <Name>ABCMetrics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MSR.Util\MSR.Util.csproj">
       <Project>{8F9A4FAD-4EEB-4590-BEF5-034CDE2BFFBB}</Project>
       <Name>MSR.Util</Name>

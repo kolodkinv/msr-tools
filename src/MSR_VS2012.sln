@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSR", "MSR\MSR.csproj", "{25E8A69D-6400-423F-8B83-C22C096E9D72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSR.Models", "MSR.Models\MSR.Models.csproj", "{E8BE4CCD-C394-41F0-8D7B-28515D2DDD5F}"
@@ -24,6 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSR.Tools.Visualizer.Tests", "MSR.Tools.Visualizer.Tests\MSR.Tools.Visualizer.Tests.csproj", "{97666001-D547-4A12-B16E-851B6DAF1955}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSR.Util", "MSR.Util\MSR.Util.csproj", "{8F9A4FAD-4EEB-4590-BEF5-034CDE2BFFBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABCMetrics", "ABCMetrics\ABCMetrics.csproj", "{343A5293-2A42-4943-B4D3-E60BCAB2E38F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestABCMetrics", "TestABCMetrics\TestABCMetrics.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +85,14 @@ Global
 		{8F9A4FAD-4EEB-4590-BEF5-034CDE2BFFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F9A4FAD-4EEB-4590-BEF5-034CDE2BFFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F9A4FAD-4EEB-4590-BEF5-034CDE2BFFBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{343A5293-2A42-4943-B4D3-E60BCAB2E38F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343A5293-2A42-4943-B4D3-E60BCAB2E38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343A5293-2A42-4943-B4D3-E60BCAB2E38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{343A5293-2A42-4943-B4D3-E60BCAB2E38F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

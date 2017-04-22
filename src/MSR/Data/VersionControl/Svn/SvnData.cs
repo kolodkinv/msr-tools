@@ -53,7 +53,17 @@ namespace MSR.Data.VersionControl.Svn
 				return SvnBlame.Parse(blame);
 			}
 		}
-		public string RevisionByNumber(int revisionNumber)
+
+        public IBodyFile Show(string revision, string filePath)
+        {
+            //TODO
+            using (var blame = svn.Blame(revision, filePath))
+            {
+                return SvnBodyFile.Parse(blame);
+            }         
+        }
+
+        public string RevisionByNumber(int revisionNumber)
 		{
 			if (revisionNumber <= numberOfRevisions)
 			{

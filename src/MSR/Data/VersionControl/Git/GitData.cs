@@ -48,7 +48,16 @@ namespace MSR.Data.VersionControl.Git
 				return GitBlame.Parse(blame);
 			}
 		}
-		public string RevisionByNumber(int revisionNumber)
+
+        public IBodyFile Show(string revision, string filePath)
+        {
+            using (var bodyFile = git.Show(revision, filePath))
+            {
+                return GitBodyFile.Parse(bodyFile);
+            }
+        }
+
+        public string RevisionByNumber(int revisionNumber)
 		{
 			if (revisions == null)
 			{

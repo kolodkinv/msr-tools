@@ -21,5 +21,6 @@ namespace MSR.Data.VersionControl.Git
 		Stream Diff(string revision, string path);
 		Stream Diff(string newPath, string newRevision, string oldPath, string oldRevision);
 		Stream Blame(string revision, string path);
-	}
+        Stream Show(string revision, string path);
+    }
 }

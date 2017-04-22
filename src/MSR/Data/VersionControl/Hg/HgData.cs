@@ -48,6 +48,15 @@ namespace MSR.Data.VersionControl.Hg
                 return HgBlame.Parse(blame);
             }
         }
+
+        public IBodyFile Show(string revision, string filePath)                                               //[+-]
+        {
+            //TODO
+            using (var blame = hg.Blame(revision, filePath))
+            {
+                return HgBodyFile.Parse(blame);
+            }
+        }
         public string RevisionByNumber(int revisionNumber)                                                  //[+-]
         {
             if (revisions == null)

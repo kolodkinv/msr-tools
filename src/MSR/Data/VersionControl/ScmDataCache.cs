@@ -15,8 +15,10 @@ namespace MSR.Data.VersionControl
 		private SmartDictionary<string,ILog> logs;
 		private SmartDictionary<string,SmartDictionary<string,IDiff>> diffs;
 		private SmartDictionary<string,IBlame> blames;
-		
-		public ScmDataCache(IScmData innerScmData)
+        private SmartDictionary<string, IBodyFile> bodys;
+
+
+        public ScmDataCache(IScmData innerScmData)
 		{
 			this.innerScmData = innerScmData;
 			
@@ -25,7 +27,9 @@ namespace MSR.Data.VersionControl
 				new SmartDictionary<string,IDiff>(y => innerScmData.Diff(x, y))
 			);
 			blames = new FixedSizeDictionary<string,IBlame>(100);
-		}
+            bodys = new FixedSizeDictionary<string, IBodyFile>(100);
+
+        }
 		public ILog Log(string revision)
 		{
 			return logs[revision];
@@ -47,7 +51,18 @@ namespace MSR.Data.VersionControl
 			}
 			return blames[key];
 		}
-		public string RevisionByNumber(int revisionNumber)
+
+        public IBodyFile Show(string revision, string filePath)
+        {
+            string key = revision + filePath;
+            if (!bodys.ContainsKey(key))
+            {
+                bodys.Add(key, innerScmData.Show(revision, filePath));
+            }
+            return bodys[key];
+        }
+
+        public string RevisionByNumber(int revisionNumber)
 		{
 			return innerScmData.RevisionByNumber(revisionNumber);
 		}

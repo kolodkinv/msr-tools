@@ -11,6 +11,8 @@ using System.Linq;
 using MSR.Data.VersionControl;
 using MSR.Data.Entities.DSL.Mapping;
 using MSR.Data.Entities.DSL.Selection;
+using ABCMetrics;
+using System.Threading.Tasks;
 
 namespace MSR.Data.Entities.Mapping
 {
@@ -28,8 +30,9 @@ namespace MSR.Data.Entities.Mapping
 			bool fileIsNew = (file.AddedInCommit != null) && (file.AddedInCommit.Revision == revision);
 			bool fileCopied = fileIsNew && (file.SourceFile != null);
 			bool fileDeleted = file.DeletedInCommit != null;
-			
-			if (fileDeleted)
+            IMetricsLanguage metricsCalculator = new MetricsLanguageC(new KeyTokensSetCPlus());
+
+            if (fileDeleted)
 			{
 				codeBlockExpressions.Add(
 					expression.DeleteCode()
@@ -39,6 +42,10 @@ namespace MSR.Data.Entities.Mapping
 			{
 				IBlame blame = scmData.Blame(revision, file.Path);
 				var linesByRevision = from l in blame group l.Key by l.Value;
+
+                IBodyFile bodyFile = scmData.Show(revision, file.Path);
+
+                Console.WriteLine(revision + "  " + file.Path);
 				
 				if (fileCopied)
 				{
@@ -58,9 +65,19 @@ namespace MSR.Data.Entities.Mapping
 					var addedCode = linesByRevision.SingleOrDefault(x => x.Key == revision);
 					if (addedCode != null)
 					{
-						codeBlockExpressions.Add(
-							expression.Code(addedCode.Count())
-						);
+                        double totalValueMetric = 0;
+                        string totalCode = "";
+                        foreach(int indexLineCode in addedCode)
+                        {
+                            var lineCode = bodyFile.ElementAt(indexLineCode-1);
+                            //Console.WriteLine(lineCode);
+                            //totalValueMetric += metricsCalculator.CalculateMetrics(lineCode);
+                            totalCode += lineCode + "\n";
+                        }
+                        totalValueMetric = metricsCalculator.CalculateMetrics(totalCode);
+                        codeBlockExpressions.Add(
+                        	expression.Code(totalValueMetric)
+                        );
 					}
 					
 					foreach (var existentCode in (
@@ -83,7 +100,7 @@ namespace MSR.Data.Entities.Mapping
 						}
 					))
 					{
-						var linesForRevision = linesByRevision.SingleOrDefault(x => x.Key == existentCode.Revision);
+						/*var linesForRevision = linesByRevision.SingleOrDefault(x => x.Key == existentCode.Revision);
 						double realCodeSize = linesForRevision == null ? 0 : linesForRevision.Count();
 						if (existentCode.CodeSize > realCodeSize)
 						{
@@ -91,7 +108,7 @@ namespace MSR.Data.Entities.Mapping
 								expression.Code(realCodeSize - existentCode.CodeSize)
 							);
 							codeBlockExpressions.Last().ForCodeAddedInitiallyInRevision(existentCode.Revision);
-						}
+						}*/
 					}
 				}
 			}
