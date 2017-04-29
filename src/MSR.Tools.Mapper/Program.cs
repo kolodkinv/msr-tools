@@ -24,12 +24,12 @@ namespace MSR.Tools.Mapper
 			string path = null;
 			string dir = null;
 
-            args = new string[5];
+           /* args = new string[5];
             args[0] = "C:\\Users\\Vladimir\\Desktop\\MSR\\test2.config";
             args[1] = "map";
             args[2] = "-c";
             args[3] = "-n";
-            args[4] = "10";
+            args[4] = "7";*/
 
             try
 			{
