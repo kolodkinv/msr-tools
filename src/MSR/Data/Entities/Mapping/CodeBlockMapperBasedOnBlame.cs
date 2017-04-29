@@ -50,13 +50,12 @@ namespace MSR.Data.Entities.Mapping
                     foreach (var linesForRevision in linesByRevision)
                     {
                         double totalValueMetric = 0;
-                        string totalCode = "";
                         foreach (int indexLineCode in linesForRevision)
                         {
                             var lineCode = bodyFile.ElementAt(indexLineCode - 1);
-                            totalCode += lineCode + "\n";
+                            totalValueMetric += metricsCalculator.CalculateMetrics(lineCode);
                         }
-                        totalValueMetric = metricsCalculator.CalculateMetrics(totalCode);
+
                         codeBlockExpressions.Add(
                             expression.Code(totalValueMetric)
                         );
@@ -73,13 +72,11 @@ namespace MSR.Data.Entities.Mapping
                     if (addedCode != null)
                     {
                         double totalValueMetric = 0;
-                        string totalCode = "";
                         foreach (int indexLineCode in addedCode)
                         {
                             var lineCode = bodyFile.ElementAt(indexLineCode - 1);
-                            totalCode += lineCode + "\n";
+                            totalValueMetric += metricsCalculator.CalculateMetrics(lineCode);
                         }
-                        totalValueMetric = metricsCalculator.CalculateMetrics(totalCode);
                         codeBlockExpressions.Add(
                             expression.Code(totalValueMetric)
                         );
@@ -109,18 +106,19 @@ namespace MSR.Data.Entities.Mapping
 
                         IBodyFile bodyFileForRevision = scmData.Show(revision, file.Path);
 
-                        string totalCodeForRevision = "";
+                        double totalValueMetric = 0;
                         try
                         {
                             foreach (int indexLineCodeForRevision in linesForRevision)
                             {
                                 var lineCode = bodyFileForRevision.ElementAt(indexLineCodeForRevision - 1);
-                                totalCodeForRevision += lineCode + "\n";
+
+                                totalValueMetric+=metricsCalculator.CalculateMetrics(lineCode);
                             }
                         }
                         catch { }
 
-                        double realCodeSize = linesForRevision == null ? 0 : metricsCalculator.CalculateMetrics(totalCodeForRevision);
+                        double realCodeSize = linesForRevision == null ? 0 : totalValueMetric;
                         if (existentCode.CodeSize > realCodeSize)
                         {
                             codeBlockExpressions.Add(
